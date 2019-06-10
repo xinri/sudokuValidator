@@ -10,12 +10,12 @@ import sudoku.field.valuetype.SudokuTable;
  * @author hlay
  * @version 1.0
  */
-public class SudokuFieldShould {
+public class SudokuGridShould {
 
   @Test
   public void create_a_sudoku_field_when_the_table_is_a_9x9() {
     // when
-    SudokuField result = new SudokuField(new SudokuTable(fillTable(9, 9, 1)));
+    SudokuGrid result = new SudokuGrid(new SudokuTable(fillTable(9, 9, 1)));
     // then
     Assertions.assertThat(result).isNotNull();
   }
