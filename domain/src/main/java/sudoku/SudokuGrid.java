@@ -48,7 +48,7 @@ public class SudokuGrid {
     return true;
   }
 
-  public boolean validateColumns() {
+  boolean validateColumns() {
     for (int column = 0; column < MAX_SIZE; column++) {
       Set<Integer> existingNumber = new HashSet<>();
 
@@ -67,7 +67,7 @@ public class SudokuGrid {
     return true;
   }
 
-  public boolean validateBlock(int blockNumber) {
+  boolean validateBlock(int blockNumber) {
     HashSet<Integer> existingElement = new HashSet<>();
 
     int posX, posY;

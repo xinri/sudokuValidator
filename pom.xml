@@ -6,7 +6,13 @@
 
   <groupId>org.xinri</groupId>
   <artifactId>sudokuValidator</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>domain</module>
+    <module>infrastructure</module>
+    <module>bootstrap</module>
+  </modules>
 
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -28,17 +34,6 @@
         </configuration>
       </plugin>
     </plugins>
-
-    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-    </testResources>
   </build>
 
   <dependencies>
