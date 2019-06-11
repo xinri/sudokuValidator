@@ -40,7 +40,7 @@ public class CsvFileAdapter {
         tableRepresentation.add(
             Arrays.stream(values)
                 .map(String::trim)
-                .map(Integer::valueOf)
+                .map(value -> value.isEmpty() ? null : Integer.valueOf(value))
                 .collect(Collectors.toList()));
       }
 

@@ -34,11 +34,14 @@ public class SudokuGrid {
 
       for (int column = 0; column < MAX_SIZE; column++) {
         Integer cellValue = table[row][column].getCellValue();
-        if (existingNumber.contains(cellValue)) {
-          return false;
-        }
 
-        existingNumber.add(cellValue);
+        if (cellValue != null) {
+          if (existingNumber.contains(cellValue)) {
+            return false;
+          }
+
+          existingNumber.add(cellValue);
+        }
       }
     }
 
@@ -51,11 +54,14 @@ public class SudokuGrid {
 
       for (int row = 0; row < MAX_SIZE; row++) {
         Integer cellValue = table[row][column].getCellValue();
-        if (existingNumber.contains(cellValue)) {
-          return false;
-        }
 
-        existingNumber.add(cellValue);
+        if (cellValue != null) {
+          if (existingNumber.contains(cellValue)) {
+            return false;
+          }
+
+          existingNumber.add(cellValue);
+        }
       }
     }
 
@@ -89,10 +95,13 @@ public class SudokuGrid {
     for (int row = 0; row < 3; row++) {
       for (int column = 0; column < 3; column++) {
         Integer cellValue = block[row][column].getCellValue();
-        if (existingElement.contains(cellValue)) {
-          return false;
+
+        if (cellValue != null) {
+          if (existingElement.contains(cellValue)) {
+            return false;
+          }
+          existingElement.add(cellValue);
         }
-        existingElement.add(cellValue);
       }
     }
 

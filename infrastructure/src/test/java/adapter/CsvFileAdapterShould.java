@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import adapter.exception.EmptyFileException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -45,7 +44,7 @@ public class CsvFileAdapterShould {
     // when and then
     assertThatThrownBy(
         () -> new CsvFileAdapter().validateFile("gridNotCorrectSize.txt"))
-          .isExactlyInstanceOf(IllegalArgumentException.class);
+        .isExactlyInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
@@ -66,8 +65,6 @@ public class CsvFileAdapterShould {
     assertThat(result).isTrue();
   }
 
-  // TODO : uncomment after having the answer
-  @Ignore
   @Test
   public void return_true_for_a_valid_file_with_a_hole() throws IOException, EmptyFileException {
     // when

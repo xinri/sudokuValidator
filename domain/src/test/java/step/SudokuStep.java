@@ -24,7 +24,7 @@ public class SudokuStep {
 
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
-        sudokuTable[i][j] = Integer.valueOf(table.cell(i, j));
+        sudokuTable[i][j] = table.cell(i, j).isEmpty() ? null : Integer.valueOf(table.cell(i, j));
       }
     }
 
