@@ -1,7 +1,6 @@
 package sudoku;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import sudoku.field.SudokuCell;
 import sudoku.field.valuetype.SudokuTable;
@@ -34,14 +33,12 @@ public class SudokuGrid {
       Set<Integer> existingNumber = new HashSet<>();
 
       for (int column = 0; column < MAX_SIZE; column++) {
-        Optional<Integer> cellValue = table[row][column].getCellValue();
-        if (cellValue.isPresent()) {
-          if (existingNumber.contains(cellValue.get())) {
-            return false;
-          }
-
-          existingNumber.add(cellValue.get());
+        Integer cellValue = table[row][column].getCellValue();
+        if (existingNumber.contains(cellValue)) {
+          return false;
         }
+
+        existingNumber.add(cellValue);
       }
     }
 
@@ -53,14 +50,12 @@ public class SudokuGrid {
       Set<Integer> existingNumber = new HashSet<>();
 
       for (int row = 0; row < MAX_SIZE; row++) {
-        Optional<Integer> cellValue = table[row][column].getCellValue();
-        if (cellValue.isPresent()) {
-          if (existingNumber.contains(cellValue.get())) {
-            return false;
-          }
-
-          existingNumber.add(cellValue.get());
+        Integer cellValue = table[row][column].getCellValue();
+        if (existingNumber.contains(cellValue)) {
+          return false;
         }
+
+        existingNumber.add(cellValue);
       }
     }
 
@@ -93,13 +88,11 @@ public class SudokuGrid {
 
     for (int row = 0; row < 3; row++) {
       for (int column = 0; column < 3; column++) {
-        Optional<Integer> cellValue = block[row][column].getCellValue();
-        if (cellValue.isPresent()) {
-          if (existingElement.contains(cellValue.get())) {
-            return false;
-          }
-          existingElement.add(cellValue.get());
+        Integer cellValue = block[row][column].getCellValue();
+        if (existingElement.contains(cellValue)) {
+          return false;
         }
+        existingElement.add(cellValue);
       }
     }
 

@@ -1,14 +1,12 @@
 package sudoku.field;
 
-import java.util.Optional;
-
 /**
  * @author hlay
  * @version 1.0
  */
 public class SudokuCell {
 
-  private final Optional<Integer> cellValue;
+  private final Integer cellValue;
 
   public SudokuCell(Integer cellValue) {
 
@@ -22,10 +20,10 @@ public class SudokuCell {
       }
     }
 
-    this.cellValue = Optional.ofNullable(cellValue);
+    this.cellValue = cellValue;
   }
 
-  public Optional<Integer> getCellValue() {
+  public Integer getCellValue() {
     return cellValue;
   }
 }

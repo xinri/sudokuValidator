@@ -43,7 +43,7 @@ public class SudokuTableShould {
     assertThat(result).isNotNull();
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
-        assertThat(result.getCells()[i][j].getCellValue().get()).isEqualTo(1);
+        assertThat(result.getCells()[i][j].getCellValue()).isEqualTo(1);
       }
     }
   }
