@@ -3,7 +3,7 @@ package sudoku;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
-import sudoku.field.valuetype.SudokuTable;
+import sudoku.field.valuetype.SudokuGridInitializer;
 
 /**
  * @author hlay
@@ -14,7 +14,7 @@ public class SudokuGridShould {
   @Test
   public void create_a_sudoku_field_when_the_table_is_a_9x9() {
     // when
-    SudokuGrid result = new SudokuGrid(new SudokuTable(fillTable(9, 9, 1)));
+    SudokuGrid result = new SudokuGrid(new SudokuGridInitializer(fillTable(9, 9, 1)));
     // then
     assertThat(result).isNotNull();
   }
@@ -34,7 +34,7 @@ public class SudokuGridShould {
         {1, 2, 3, 4, 5, 6, 7, 8, 9}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when
     boolean result = grid.validateRows();
@@ -59,7 +59,7 @@ public class SudokuGridShould {
         {null, 2, 3, 4, 5, 6, 7, 8, 9}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when
     boolean result = grid.validateRows();
@@ -72,7 +72,7 @@ public class SudokuGridShould {
   public void return_false_when_one_row_has_a_same_value() {
     // given
     SudokuGrid grid = new SudokuGrid(
-        new SudokuTable(fillTable(9, 9, 1)));
+        new SudokuGridInitializer(fillTable(9, 9, 1)));
 
     // when
     boolean result = grid.validateRows();
@@ -96,7 +96,7 @@ public class SudokuGridShould {
         {9, 9, 9, 9, 9, 9, 9, 9, 9}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when
     boolean result = grid.validateColumns();
@@ -120,7 +120,7 @@ public class SudokuGridShould {
         {9, 9, 9, 9, 9, 9, 9, 9, null}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when
     boolean result = grid.validateColumns();
@@ -134,7 +134,7 @@ public class SudokuGridShould {
   public void return_false_when_one_column_has_a_same_value() {
     // given
     SudokuGrid grid = new SudokuGrid(
-        new SudokuTable(fillTable(9, 9, 1)));
+        new SudokuGridInitializer(fillTable(9, 9, 1)));
 
     // when
     boolean result = grid.validateColumns();
@@ -158,7 +158,7 @@ public class SudokuGridShould {
         {7, 8, 9, 7, 8, 9, 7, 8, 9}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when ans then
     for (int blockNumber = 0; blockNumber < 9; blockNumber++) {
@@ -181,7 +181,7 @@ public class SudokuGridShould {
         {null, 8, 9, 7, null, 9, 7, 8, null}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when ans then
     for (int blockNumber = 0; blockNumber < 9; blockNumber++) {
@@ -204,7 +204,7 @@ public class SudokuGridShould {
         {7, 1, 9, 7, 1, 9, 7, 8, 9}
     };
 
-    SudokuGrid grid = new SudokuGrid(new SudokuTable(table));
+    SudokuGrid grid = new SudokuGrid(new SudokuGridInitializer(table));
 
     // when and then
     for (int blockNumber = 0; blockNumber < 9; blockNumber++) {

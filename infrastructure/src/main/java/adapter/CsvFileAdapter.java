@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import sudoku.SudokuGrid;
-import sudoku.field.valuetype.SudokuTable;
+import sudoku.field.valuetype.SudokuGridInitializer;
 
 /**
  * @author hlay
@@ -49,7 +49,7 @@ public class CsvFileAdapter {
       }
 
       return new SudokuGrid(
-          new SudokuTable(tableRepresentation.stream()
+          new SudokuGridInitializer(tableRepresentation.stream()
               .map(columns -> columns.stream().toArray(Integer[]::new))
               .toArray(Integer[][]::new)))
           .validate();

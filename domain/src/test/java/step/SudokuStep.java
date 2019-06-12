@@ -7,7 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import sudoku.SudokuGrid;
-import sudoku.field.valuetype.SudokuTable;
+import sudoku.field.valuetype.SudokuGridInitializer;
 
 /**
  * @author hlay
@@ -28,7 +28,7 @@ public class SudokuStep {
       }
     }
 
-    sudokuGrid = new SudokuGrid(new SudokuTable(sudokuTable));
+    sudokuGrid = new SudokuGrid(new SudokuGridInitializer(sudokuTable));
   }
 
   @When("validate the table")

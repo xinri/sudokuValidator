@@ -1,11 +1,11 @@
 package sudoku;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import sudoku.field.SudokuCell;
-import sudoku.field.valuetype.Row;
-import sudoku.field.valuetype.SudokuTable;
+import sudoku.field.valuetype.Columns;
+import sudoku.field.valuetype.Rows;
+import sudoku.field.valuetype.SudokuGridInitializer;
 
 /**
  * @author hlay
@@ -16,7 +16,7 @@ public class SudokuGrid {
   public static final int MAX_SIZE = 9;
   private final SudokuCell[][] table;
 
-  public SudokuGrid(final SudokuTable table) {
+  public SudokuGrid(final SudokuGridInitializer table) {
     this.table = table.getCells();
   }
 
@@ -30,31 +30,11 @@ public class SudokuGrid {
   }
 
   boolean validateRows() {
-    return Arrays.stream(table)
-        .map(Row::new)
-        .map(Row::validate)
-        .reduce((prevResult, nextResult) -> prevResult && nextResult)
-        .orElse(true);
+    return new Rows(table).validate();
   }
 
   boolean validateColumns() {
-    for (int column = 0; column < MAX_SIZE; column++) {
-      Set<Integer> existingNumber = new HashSet<>();
-
-      for (int row = 0; row < MAX_SIZE; row++) {
-        Integer cellValue = table[row][column].getCellValue();
-
-        if (cellValue != null) {
-          if (existingNumber.contains(cellValue)) {
-            return false;
-          }
-
-          existingNumber.add(cellValue);
-        }
-      }
-    }
-
-    return true;
+    return new Columns(table).validate();
   }
 
   boolean validateBlock(int blockNumber) {

@@ -7,11 +7,11 @@ import sudoku.field.SudokuCell;
  * @author hlay
  * @version 1.0
  */
-public class SudokuTable {
+public class SudokuGridInitializer {
 
   private final SudokuCell[][] cells;
 
-  public SudokuTable(final Integer[][] cells) {
+  public SudokuGridInitializer(final Integer[][] cells) {
     if (cells.length == 0) {
       throw new IllegalArgumentException("The table is empty");
     }
@@ -31,9 +31,5 @@ public class SudokuTable {
 
   public SudokuCell[][] getCells() {
     return cells.clone();
-  }
-
-  public Row[] getRows() {
-    return new Row[0];
   }
 }
