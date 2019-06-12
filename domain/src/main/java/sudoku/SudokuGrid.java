@@ -1,8 +1,10 @@
 package sudoku;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import sudoku.field.SudokuCell;
+import sudoku.field.valuetype.Row;
 import sudoku.field.valuetype.SudokuTable;
 
 /**
@@ -28,24 +30,11 @@ public class SudokuGrid {
   }
 
   boolean validateRows() {
-
-    for (int row = 0; row < MAX_SIZE; row++) {
-      Set<Integer> existingNumber = new HashSet<>();
-
-      for (int column = 0; column < MAX_SIZE; column++) {
-        Integer cellValue = table[row][column].getCellValue();
-
-        if (cellValue != null) {
-          if (existingNumber.contains(cellValue)) {
-            return false;
-          }
-
-          existingNumber.add(cellValue);
-        }
-      }
-    }
-
-    return true;
+    return Arrays.stream(table)
+        .map(Row::new)
+        .map(Row::validate)
+        .reduce((prevResult, nextResult) -> prevResult && nextResult)
+        .orElse(true);
   }
 
   boolean validateColumns() {

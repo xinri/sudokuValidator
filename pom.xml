@@ -12,6 +12,7 @@
     <module>domain</module>
     <module>infrastructure</module>
     <module>bootstrap</module>
+    <module>packaging</module>
   </modules>
 
   <properties>
@@ -33,10 +34,12 @@
           </includes>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

@@ -32,4 +32,8 @@ public class SudokuTable {
   public SudokuCell[][] getCells() {
     return cells.clone();
   }
+
+  public Row[] getRows() {
+    return new Row[0];
+  }
 }
