@@ -1,6 +1,7 @@
 package sudoku.field;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * @author hlay
@@ -8,6 +9,8 @@ import java.util.Objects;
  */
 public class SudokuCell {
 
+  public static final Predicate<SudokuCell> NOT_NULL_PREDICATE = cell -> cell.getCellValue()
+      != null;
   private final Integer cellValue;
 
   public SudokuCell(Integer cellValue) {

@@ -1,8 +1,9 @@
 package sudoku.field.valuetype;
 
+import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import sudoku.field.SudokuCell;
 
@@ -12,7 +13,6 @@ import sudoku.field.SudokuCell;
  */
 public class Rows {
 
-  private static final Predicate<SudokuCell> CELL_NOT_NULL = cell -> cell.getCellValue() != null;
   private List<SudokuCell[]> listOfRow;
 
   public Rows(final SudokuCell[][] table) {
@@ -28,7 +28,7 @@ public class Rows {
 
   private boolean validateRow(final SudokuCell[] row) {
     return Arrays.stream(row)
-        .filter(CELL_NOT_NULL)
-        .distinct().count() == Arrays.stream(row).filter(CELL_NOT_NULL).count();
+        .filter(NOT_NULL_PREDICATE)
+        .distinct().count() == Arrays.stream(row).filter(NOT_NULL_PREDICATE).count();
   }
 }

@@ -18,7 +18,7 @@ public class SudokuStep {
   private SudokuGrid sudokuGrid;
   private boolean validationResult;
 
-  @Given("the sudoku table")
+  @Given("^the sudoku table$")
   public void theSudokuTable(DataTable table) {
     Integer[][] sudokuTable = new Integer[9][9];
 
@@ -31,17 +31,17 @@ public class SudokuStep {
     sudokuGrid = new SudokuGrid(new SudokuGridInitializer(sudokuTable));
   }
 
-  @When("validate the table")
+  @When("^validate the table$")
   public void validateTheTable() {
     validationResult = sudokuGrid.validate();
   }
 
-  @Then("the table is valid")
+  @Then("^the table is valid$")
   public void theTableIsValid() {
     assertThat(validationResult).isTrue();
   }
 
-  @Then("the table is not valid")
+  @Then("^the table is not valid")
   public void theTableIsNotValid() {
     assertThat(validationResult).isFalse();
   }
