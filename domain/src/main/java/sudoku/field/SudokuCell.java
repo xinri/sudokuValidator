@@ -9,8 +9,8 @@ import java.util.function.Predicate;
  */
 public class SudokuCell {
 
-  public static final Predicate<SudokuCell> NOT_NULL_PREDICATE = cell -> cell.getCellValue()
-      != null;
+  public static final Predicate<SudokuCell> NOT_NULL_PREDICATE =
+      cell -> cell.getCellValue() != null;
   private final Integer cellValue;
 
   public SudokuCell(Integer cellValue) {
