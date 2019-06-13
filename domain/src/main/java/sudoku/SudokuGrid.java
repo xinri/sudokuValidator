@@ -12,7 +12,6 @@ import sudoku.field.valuetype.SudokuGridInitializer;
  */
 public class SudokuGrid {
 
-  public static final int MAX_SIZE = 9;
   private final SudokuCell[][] table;
 
   public SudokuGrid(final SudokuGridInitializer table) {

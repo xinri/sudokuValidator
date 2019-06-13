@@ -1,6 +1,9 @@
 package sudoku.field;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -11,7 +14,8 @@ public class SudokuCell {
 
   public static final Predicate<SudokuCell> NOT_NULL_PREDICATE =
       cell -> cell.getCellValue() != null;
-  private final Integer cellValue;
+  private Integer cellValue;
+  private final Set<Integer> potentialValue;
 
   public SudokuCell(Integer cellValue) {
 
@@ -25,10 +29,24 @@ public class SudokuCell {
       }
     }
 
+    if (cellValue == null) {
+      potentialValue = new HashSet<Integer>() {{
+        for (int i = 0; i < 9; i++) {
+          add(i + 1);
+        }
+      }};
+    } else {
+      potentialValue = null;
+    }
+
     this.cellValue = cellValue;
   }
 
   public Integer getCellValue() {
+    if (cellValue == null && potentialValue.size() == 1) {
+      cellValue = potentialValue.iterator().next();
+      potentialValue.clear();
+    }
     return cellValue;
   }
 
@@ -47,5 +65,16 @@ public class SudokuCell {
   @Override
   public int hashCode() {
     return Objects.hash(cellValue);
+  }
+
+  public Set<Integer> getSetOfPotentialValue() {
+    if (cellValue != null) {
+      return null;
+    }
+    return Collections.unmodifiableSet(potentialValue);
+  }
+
+  public boolean removePotentialValue(int value) {
+    return potentialValue.remove(value);
   }
 }

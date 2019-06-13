@@ -9,6 +9,7 @@ import sudoku.field.SudokuCell;
  */
 public class SudokuGridInitializer {
 
+  private static final int MAX_SIZE = 9;
   private final SudokuCell[][] cells;
 
   public SudokuGridInitializer(final Integer[][] cells) {
@@ -16,11 +17,11 @@ public class SudokuGridInitializer {
       throw new IllegalArgumentException("The table is empty");
     }
 
-    if (cells.length != 9) {
+    if (cells.length != MAX_SIZE) {
       throw new IllegalArgumentException("The table must have a length of 9");
     }
 
-    if (cells[0].length != 9) {
+    if (cells[0].length != MAX_SIZE) {
       throw new IllegalArgumentException("The table must have a height of 9");
     }
 
