@@ -2,6 +2,8 @@ package adapter;
 
 import adapter.exception.EmptyFileException;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +29,12 @@ public class CsvFileAdapter {
     InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(csvFileName);
 
     if (resourceAsStream == null) {
-      throw new FileNotFoundException("The file " + csvFileName + " cannot be found");
+      File file = new File(csvFileName);
+
+      if (!file.exists()) {
+        throw new FileNotFoundException("The file " + csvFileName + " cannot be found");
+      }
+      resourceAsStream = new FileInputStream(file);
     }
 
     try (BufferedReader br = new BufferedReader(new InputStreamReader(resourceAsStream))) {

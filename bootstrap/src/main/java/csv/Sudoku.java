@@ -12,25 +12,30 @@ public class Sudoku {
 
   public static void main(String[] args) {
     if (args.length != 1) {
-      System.out.println("Error : the program must be called with 1 filename");
-      System.exit(-1);
+      errorMessageHandler("Error : the program must be called with 1 filename");
     }
 
     try {
       if (new CsvFileAdapter().validateFile(args[0])) {
+        System.out.println("0");
         System.exit(0);
       }
 
-      System.out.println("Validation error, the table has errors");
-      System.exit(-1);
+      errorMessageHandler("Validation error : Invalid Sudoku Grid");
     } catch (EmptyFileException e) {
       System.out.println(e.getMessage());
     } catch (IOException e) {
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage());
+      errorMessageHandler(e.getMessage());
     } finally {
-      System.exit(-1);
+      errorMessageHandler("");
     }
+  }
+
+  private static void errorMessageHandler(final String message) {
+    System.out.println("-1");
+    System.out.println(message);
+    System.exit(-1);
   }
 }
