@@ -4,6 +4,7 @@ import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import sudoku.field.SudokuCell;
 
@@ -19,6 +20,20 @@ public class Rows {
     this.listOfRow = Arrays.stream(table).collect(Collectors.toList());
   }
 
+  public void workOnEmptyCell() {
+    listOfRow.forEach(row -> {
+      if (Arrays.stream(row).filter(NOT_NULL_PREDICATE).count() > 0) {
+        Set<Integer> setToRemove = Arrays.stream(row).
+            filter(NOT_NULL_PREDICATE)
+            .map(SudokuCell::getCellValue)
+            .collect(Collectors.toSet());
+
+        Arrays.stream(row).filter(cell -> cell.getCellValue() == null)
+            .forEach(cell -> cell.removePotentialValues(setToRemove));
+      }
+    });
+  }
+
   public boolean validate() {
     return listOfRow.stream()
         .map(this::validateRow)
@@ -27,8 +42,13 @@ public class Rows {
   }
 
   private boolean validateRow(final SudokuCell[] row) {
-    return Arrays.stream(row)
+    boolean isTheSameCount = Arrays.stream(row)
         .filter(NOT_NULL_PREDICATE)
         .distinct().count() == Arrays.stream(row).filter(NOT_NULL_PREDICATE).count();
+
+    boolean isNoSolutionForEmptyCell = Arrays.stream(row).filter(cell -> cell.getCellValue() == null)
+        .anyMatch(cell -> cell.getSetOfPotentialValue().isEmpty());
+
+    return isTheSameCount && !isNoSolutionForEmptyCell;
   }
 }

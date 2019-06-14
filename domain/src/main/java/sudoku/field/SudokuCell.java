@@ -1,5 +1,6 @@
 package sudoku.field;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -76,5 +77,9 @@ public class SudokuCell {
 
   public boolean removePotentialValue(int value) {
     return potentialValue.remove(value);
+  }
+
+  public boolean removePotentialValues(Collection<Integer> values) {
+    return potentialValue.removeAll(values);
   }
 }

@@ -16,10 +16,17 @@ public class SudokuGrid {
 
   public SudokuGrid(final SudokuGridInitializer table) {
     this.table = table.getCells();
+    workOnEmptyCells();
   }
 
   public boolean validate() {
     return validateRows() && validateColumns() && validateBlocks();
+  }
+
+  private void workOnEmptyCells() {
+    new Rows(table).workOnEmptyCell();
+    new Columns(table).workOnEmptyCell();
+    new Blocks(table).workOnEmptyCell();
   }
 
   private boolean validateRows() {

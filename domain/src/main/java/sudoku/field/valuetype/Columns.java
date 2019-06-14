@@ -5,6 +5,8 @@ import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import sudoku.field.SudokuCell;
 
 /**
@@ -36,8 +38,27 @@ public class Columns {
   }
 
   private boolean validateColumn(final SudokuCell[] column) {
-    return Arrays.stream(column)
+    boolean isTheSameCount = Arrays.stream(column)
         .filter(NOT_NULL_PREDICATE)
         .distinct().count() == Arrays.stream(column).filter(NOT_NULL_PREDICATE).count();
+
+    boolean isNoSolutionForEmptyCell = Arrays.stream(column).filter(cell -> cell.getCellValue() == null)
+        .anyMatch(cell -> cell.getSetOfPotentialValue().isEmpty());
+
+    return isTheSameCount && !isNoSolutionForEmptyCell;
+  }
+
+  public void workOnEmptyCell() {
+    listOfColumn.forEach(row -> {
+      if (Arrays.stream(row).filter(NOT_NULL_PREDICATE).count() > 0) {
+        Set<Integer> setToRemove = Arrays.stream(row).
+            filter(NOT_NULL_PREDICATE)
+            .map(SudokuCell::getCellValue)
+            .collect(Collectors.toSet());
+
+        Arrays.stream(row).filter(cell -> cell.getCellValue() == null)
+            .forEach(cell -> cell.removePotentialValues(setToRemove));
+      }
+    });
   }
 }
