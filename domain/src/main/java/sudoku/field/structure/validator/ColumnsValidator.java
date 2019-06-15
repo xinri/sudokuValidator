@@ -1,31 +1,22 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure.validator;
 
 import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import sudoku.field.SudokuCell;
+import sudoku.field.structure.Columns;
 
 /**
  * @author hlay
  * @version 1.0
  */
-public class Columns {
+public class ColumnsValidator {
 
   private final List<SudokuCell[]> listOfColumn;
 
-  public Columns(SudokuCell[][] table) {
-
-    listOfColumn = new ArrayList<>();
-
-    for (int column = 0; column < table[0].length; column++) {
-      List<SudokuCell> columnCell = new ArrayList<>();
-      for (SudokuCell[] sudokuCells : table) {
-        columnCell.add(sudokuCells[column]);
-      }
-      listOfColumn.add(columnCell.toArray(new SudokuCell[0]));
-    }
+  public ColumnsValidator(Columns columns) {
+    listOfColumn = columns.getListOfColumn();
   }
 
   public boolean validate() {

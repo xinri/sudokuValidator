@@ -1,10 +1,12 @@
 package sudoku;
 
 import sudoku.field.SudokuCell;
-import sudoku.field.valuetype.Blocks;
-import sudoku.field.valuetype.Columns;
-import sudoku.field.valuetype.Rows;
-import sudoku.field.valuetype.SudokuGridInitializer;
+import sudoku.field.structure.Blocks;
+import sudoku.field.structure.Columns;
+import sudoku.field.structure.Rows;
+import sudoku.field.structure.SudokuGridInitializer;
+import sudoku.field.structure.validator.ColumnsValidator;
+import sudoku.field.structure.validator.RowsValidator;
 
 /**
  * @author hlay
@@ -23,11 +25,11 @@ public class SudokuGrid {
   }
 
   private boolean validateRows() {
-    return new Rows(table).validate();
+    return new RowsValidator(new Rows(table)).validate();
   }
 
   private boolean validateColumns() {
-    return new Columns(table).validate();
+    return new ColumnsValidator(new Columns(table)).validate();
   }
 
   private boolean validateBlocks() {

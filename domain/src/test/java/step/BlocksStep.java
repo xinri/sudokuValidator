@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import sudoku.field.SudokuCell;
-import sudoku.field.valuetype.Blocks;
+import sudoku.field.structure.Blocks;
 
 /**
  * @author hlay

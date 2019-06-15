@@ -1,26 +1,25 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure.validator;
 
 import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import sudoku.field.SudokuCell;
+import sudoku.field.structure.Rows;
 
 /**
  * @author hlay
  * @version 1.0
  */
-public class Rows {
+public class RowsValidator {
 
-  private List<SudokuCell[]> listOfRow;
+  private final Rows rows;
 
-  public Rows(final SudokuCell[][] table) {
-    this.listOfRow = Arrays.stream(table).collect(Collectors.toList());
+  public RowsValidator(final Rows rows) {
+    this.rows = rows;
   }
 
   public boolean validate() {
-    return listOfRow.stream()
+    return rows.getListOfRow().stream()
         .map(this::validateRow)
         .reduce((prevResult, nextResult) -> prevResult && nextResult)
         .orElse(true);

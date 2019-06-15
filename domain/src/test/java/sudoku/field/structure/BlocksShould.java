@@ -1,4 +1,4 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

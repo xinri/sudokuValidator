@@ -1,4 +1,4 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure;
 
 import java.util.Arrays;
 import sudoku.field.SudokuCell;

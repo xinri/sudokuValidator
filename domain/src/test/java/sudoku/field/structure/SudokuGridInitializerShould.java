@@ -1,4 +1,4 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

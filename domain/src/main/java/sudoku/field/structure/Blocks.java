@@ -1,4 +1,4 @@
-package sudoku.field.valuetype;
+package sudoku.field.structure;
 
 import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
 
@@ -14,7 +14,7 @@ import sudoku.field.SudokuCell;
  */
 public class Blocks {
 
-  private List<SudokuCell[][]> listOfBlocks;
+  private List<SudokuCell[]> listOfBlocks;
 
   public Blocks(SudokuCell[][] table) {
 
@@ -30,11 +30,11 @@ public class Blocks {
 
     for (int row = 0; row < table.length; row += 3) {
       for (int column = 0; column < table[row].length; column += 3) {
-        listOfBlocks.add(new SudokuCell[][]
+        listOfBlocks.add(new SudokuCell[]
             {
-                {table[row][column], table[row][column + 1], table[row][column + 2]},
-                {table[row + 1][column], table[row + 1][column + 1], table[row + 1][column + 2]},
-                {table[row + 2][column], table[row + 2][column + 1], table[row + 2][column + 2]}
+                table[row][column], table[row][column + 1], table[row][column + 2],
+                table[row + 1][column], table[row + 1][column + 1], table[row + 1][column + 2],
+                table[row + 2][column], table[row + 2][column + 1], table[row + 2][column + 2]
             });
       }
     }
@@ -47,14 +47,13 @@ public class Blocks {
         .orElse(true);
   }
 
-  private boolean validateBlock(SudokuCell[][] block) {
-    return Arrays.stream(block).flatMap(Arrays::stream)
+  private boolean validateBlock(SudokuCell[] block) {
+    return Arrays.stream(block)
         .filter(NOT_NULL_PREDICATE).distinct().count() == Arrays.stream(block)
-        .flatMap(Arrays::stream)
         .filter(NOT_NULL_PREDICATE).count();
   }
 
-  public List<SudokuCell[][]> getBlocks() {
+  public List<SudokuCell[]> getBlocks() {
     return Collections.unmodifiableList(listOfBlocks);
   }
 }

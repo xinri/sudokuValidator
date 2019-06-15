@@ -7,7 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import sudoku.SudokuGrid;
-import sudoku.field.valuetype.SudokuGridInitializer;
+import sudoku.field.structure.SudokuGridInitializer;
 
 /**
  * @author hlay
