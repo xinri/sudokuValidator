@@ -15,7 +15,7 @@ public class SudokuCell {
   public static final Predicate<SudokuCell> NOT_NULL_PREDICATE =
       cell -> cell.getCellValue() != null;
   private Integer cellValue;
-  private final Set<Integer> potentialValue;
+  private Set<Integer> potentialValue;
 
   public SudokuCell(Integer cellValue) {
 
@@ -29,17 +29,19 @@ public class SudokuCell {
       }
     }
 
+    initPotentialValue(cellValue);
+
+    this.cellValue = cellValue;
+  }
+
+  private void initPotentialValue(Integer cellValue) {
     if (cellValue == null) {
       potentialValue = new HashSet<Integer>() {{
         for (int i = 0; i < 9; i++) {
           add(i + 1);
         }
       }};
-    } else {
-      potentialValue = null;
     }
-
-    this.cellValue = cellValue;
   }
 
   public Integer getCellValue() {
@@ -48,6 +50,17 @@ public class SudokuCell {
       potentialValue.clear();
     }
     return cellValue;
+  }
+
+  public Set<Integer> getSetOfPotentialValue() {
+    if (cellValue != null) {
+      return null;
+    }
+    return Collections.unmodifiableSet(potentialValue);
+  }
+
+  public boolean removePotentialValue(int value) {
+    return potentialValue.remove(value);
   }
 
   @Override
@@ -65,16 +78,5 @@ public class SudokuCell {
   @Override
   public int hashCode() {
     return Objects.hash(cellValue);
-  }
-
-  public Set<Integer> getSetOfPotentialValue() {
-    if (cellValue != null) {
-      return null;
-    }
-    return Collections.unmodifiableSet(potentialValue);
-  }
-
-  public boolean removePotentialValue(int value) {
-    return potentialValue.remove(value);
   }
 }
