@@ -14,6 +14,8 @@ public class SudokuCell {
 
   public static final Predicate<SudokuCell> NOT_NULL_PREDICATE =
       cell -> cell.getCellValue() != null;
+
+
   private Integer cellValue;
   private Set<Integer> potentialValue;
 
@@ -29,7 +31,7 @@ public class SudokuCell {
       }
     }
 
-    initPotentialValue(cellValue);
+    this.initPotentialValue(cellValue);
 
     this.cellValue = cellValue;
   }
@@ -45,11 +47,16 @@ public class SudokuCell {
   }
 
   public Integer getCellValue() {
+    // TO REMOVE BECAUSE IT IS NOT IN ITS RESPONSIBILITY
     if (cellValue == null && potentialValue.size() == 1) {
       cellValue = potentialValue.iterator().next();
       potentialValue.clear();
     }
     return cellValue;
+  }
+
+  public void setCellValue(Integer cellValue) {
+    this.cellValue = cellValue;
   }
 
   public Set<Integer> getSetOfPotentialValue() {
