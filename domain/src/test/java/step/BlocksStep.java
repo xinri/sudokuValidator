@@ -9,6 +9,8 @@ import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import sudoku.field.SudokuCell;
 import sudoku.field.structure.Blocks;
+import sudoku.field.structure.validator.BlocksValidator;
+import sudoku.field.structure.validator.BlocksValidatorShould;
 
 /**
  * @author hlay
@@ -17,6 +19,7 @@ import sudoku.field.structure.Blocks;
 public class BlocksStep {
 
   private Blocks blocks;
+  private BlocksValidator blocksValidator;
   private boolean validationResult;
 
   @Given("^the creation of blocks with the following table$")
@@ -31,11 +34,12 @@ public class BlocksStep {
         ).toArray(SudokuCell[][]::new);
 
     blocks = new Blocks(sudokuCells);
+    blocksValidator = new BlocksValidator(blocks);
   }
 
   @When("^the blocks trigger a validation$")
   public void validateBlock() {
-    validationResult = blocks.validate();
+    validationResult = blocksValidator.validate();
   }
 
   @Then("^the blocks are valid$")

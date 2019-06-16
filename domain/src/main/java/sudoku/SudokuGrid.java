@@ -5,6 +5,7 @@ import sudoku.field.structure.Blocks;
 import sudoku.field.structure.Columns;
 import sudoku.field.structure.Rows;
 import sudoku.field.structure.SudokuGridInitializer;
+import sudoku.field.structure.validator.BlocksValidator;
 import sudoku.field.structure.validator.ColumnsValidator;
 import sudoku.field.structure.validator.RowsValidator;
 
@@ -33,6 +34,6 @@ public class SudokuGrid {
   }
 
   private boolean validateBlocks() {
-    return new Blocks(table).validate();
+    return new BlocksValidator(new Blocks(table)).validate();
   }
 }

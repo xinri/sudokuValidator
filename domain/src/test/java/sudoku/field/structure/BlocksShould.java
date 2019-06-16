@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
  * @version 1.0
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features/blocks", glue = "")
+@CucumberOptions(features = "src/test/resources/features/blocks/blockCreation.feature", glue = "")
 public class BlocksShould {
 
 }

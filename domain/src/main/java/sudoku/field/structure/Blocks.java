@@ -1,9 +1,6 @@
 package sudoku.field.structure;
 
-import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import sudoku.field.SudokuCell;
@@ -38,19 +35,6 @@ public class Blocks {
             });
       }
     }
-  }
-
-  public boolean validate() {
-    return listOfBlocks.stream()
-        .map(this::validateBlock)
-        .reduce((prevResult, nextResult) -> prevResult && nextResult)
-        .orElse(true);
-  }
-
-  private boolean validateBlock(SudokuCell[] block) {
-    return Arrays.stream(block)
-        .filter(NOT_NULL_PREDICATE).distinct().count() == Arrays.stream(block)
-        .filter(NOT_NULL_PREDICATE).count();
   }
 
   public List<SudokuCell[]> getBlocks() {
