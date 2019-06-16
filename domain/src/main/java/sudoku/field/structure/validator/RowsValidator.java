@@ -6,7 +6,7 @@ import sudoku.field.structure.Rows;
  * @author hlay
  * @version 1.0
  */
-public class RowsValidator implements DistinctValidator {
+public class RowsValidator implements DistinctValidator, EstimationValidator {
 
   private final Rows rows;
 
@@ -15,6 +15,8 @@ public class RowsValidator implements DistinctValidator {
   }
 
   public boolean validate() {
-    return DistinctValidator.validateDistinct(rows.getListOfRow());
+    return DistinctValidator.validateDistinct(rows.getListOfRow()) &&
+        EstimationValidator.validateIfHaveAtLeastOneEstimation(rows.getListOfRow())
+        /*&& EstimationValidator.validateIfMissedValue(rows.getListOfRow())*/;
   }
 }

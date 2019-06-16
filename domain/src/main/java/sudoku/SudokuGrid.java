@@ -1,10 +1,12 @@
 package sudoku;
 
+import com.sun.rowset.internal.Row;
 import sudoku.field.SudokuCell;
 import sudoku.field.structure.Blocks;
 import sudoku.field.structure.Columns;
 import sudoku.field.structure.Rows;
 import sudoku.field.structure.SudokuGridInitializer;
+import sudoku.field.structure.estimation.EstimationUpdater;
 import sudoku.field.structure.validator.BlocksValidator;
 import sudoku.field.structure.validator.ColumnsValidator;
 import sudoku.field.structure.validator.RowsValidator;
@@ -19,6 +21,14 @@ public class SudokuGrid {
 
   public SudokuGrid(final SudokuGridInitializer table) {
     this.table = table.getCells();
+
+    updateEmptyCell();
+  }
+
+  private void updateEmptyCell() {
+    new EstimationUpdater(new Rows(table).getListOfRow()).update();
+    new EstimationUpdater(new Columns(table).getListOfColumn()).update();
+    new EstimationUpdater(new Blocks(table).getBlocks()).update();
   }
 
   public boolean validate() {
