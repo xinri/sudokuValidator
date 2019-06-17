@@ -1,9 +1,6 @@
 package sudoku.field.structure;
 
-import static sudoku.field.SudokuCell.NOT_NULL_PREDICATE;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import sudoku.field.SudokuCell;

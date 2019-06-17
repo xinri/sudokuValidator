@@ -80,23 +80,4 @@ public class SudokuCellShould {
     assertThat(sudokuCell.getCellValue()).isNull();
     assertThat(sudokuCell.getSetOfPotentialValue()).contains(1, 2, 3, 4, 6, 7, 8, 9);
   }
-
-  @Test
-  public void return_potential_value_into_cell_value_when_there_is_only_one() {
-    // given
-    SudokuCell sudokuCell = new SudokuCell(null);
-
-    // when
-    sudokuCell.removePotentialValue(1);
-    sudokuCell.removePotentialValue(2);
-    sudokuCell.removePotentialValue(4);
-    sudokuCell.removePotentialValue(5);
-    sudokuCell.removePotentialValue(6);
-    sudokuCell.removePotentialValue(7);
-    sudokuCell.removePotentialValue(8);
-    sudokuCell.removePotentialValue(9);
-
-    // then
-    assertThat(sudokuCell.getCellValue()).isNotNull().isEqualTo(3);
-  }
 }

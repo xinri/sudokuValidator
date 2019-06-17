@@ -16,7 +16,7 @@ public class BlocksValidator implements DistinctValidator, EstimationValidator {
 
   public boolean validate() {
     return DistinctValidator.validateDistinct(blocks.getBlocks()) &&
-        EstimationValidator.validateIfHaveAtLeastOneEstimation(blocks.getBlocks())
-        /*&& EstimationValidator.validateIfMissedValue(blocks.getBlocks())*/;
+        EstimationValidator.validateIfHaveAtLeastOneEstimation(blocks.getBlocks()) &&
+        EstimationValidator.validateIfMissedValue(blocks.getBlocks());
   }
 }

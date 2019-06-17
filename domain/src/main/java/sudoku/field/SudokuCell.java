@@ -12,8 +12,11 @@ import java.util.function.Predicate;
  */
 public class SudokuCell {
 
-  public static final Predicate<SudokuCell> NOT_NULL_PREDICATE =
+  public static final Predicate<SudokuCell> CELL_NOT_NULL_PREDICATE =
       cell -> cell.getCellValue() != null;
+
+  public static final Predicate<SudokuCell> CELL_NULL_PREDICATE =
+      cell -> cell.getCellValue() == null;
 
 
   private Integer cellValue;
@@ -47,11 +50,6 @@ public class SudokuCell {
   }
 
   public Integer getCellValue() {
-    // TO REMOVE BECAUSE IT IS NOT IN ITS RESPONSIBILITY
-    if (cellValue == null && potentialValue.size() == 1) {
-      cellValue = potentialValue.iterator().next();
-      potentialValue.clear();
-    }
     return cellValue;
   }
 
@@ -68,6 +66,10 @@ public class SudokuCell {
 
   public boolean removePotentialValue(int value) {
     return potentialValue.remove(value);
+  }
+
+  public void clearPotentialValue() {
+    potentialValue.clear();
   }
 
   @Override

@@ -16,7 +16,7 @@ public class RowsValidator implements DistinctValidator, EstimationValidator {
 
   public boolean validate() {
     return DistinctValidator.validateDistinct(rows.getListOfRow()) &&
-        EstimationValidator.validateIfHaveAtLeastOneEstimation(rows.getListOfRow())
-        /*&& EstimationValidator.validateIfMissedValue(rows.getListOfRow())*/;
+        EstimationValidator.validateIfHaveAtLeastOneEstimation(rows.getListOfRow()) &&
+        EstimationValidator.validateIfMissedValue(rows.getListOfRow());
   }
 }

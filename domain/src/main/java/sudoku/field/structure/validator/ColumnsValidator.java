@@ -16,7 +16,7 @@ public class ColumnsValidator implements DistinctValidator, EstimationValidator 
 
   public boolean validate() {
     return DistinctValidator.validateDistinct(columns.getListOfColumn()) &&
-        EstimationValidator.validateIfHaveAtLeastOneEstimation(columns.getListOfColumn())
-        /*&& EstimationValidator.validateIfMissedValue(columns.getListOfColumn())*/;
+        EstimationValidator.validateIfHaveAtLeastOneEstimation(columns.getListOfColumn()) &&
+        EstimationValidator.validateIfMissedValue(columns.getListOfColumn());
   }
 }

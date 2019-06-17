@@ -1,5 +1,8 @@
 package sudoku.field.structure.validator;
 
+import static sudoku.field.SudokuCell.CELL_NOT_NULL_PREDICATE;
+import static sudoku.field.SudokuCell.CELL_NULL_PREDICATE;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +20,7 @@ public interface EstimationValidator {
   static boolean validateIfHaveAtLeastOneEstimation(final List<SudokuCell[]> listOfCells) {
     return !listOfCells.stream()
         .flatMap(Arrays::stream)
-        .filter(cell -> cell.getCellValue() == null)
+        .filter(CELL_NULL_PREDICATE)
         .anyMatch(cell -> cell.getSetOfPotentialValue().size() == 0);
   }
 
@@ -31,15 +34,16 @@ public interface EstimationValidator {
           Set<Integer> valueToCheck = new HashSet<>(setOfAllValues);
 
           valueToCheck.removeAll(Arrays.stream(cells)
-              .filter(cell -> cell.getCellValue() != null)
+              .filter(CELL_NOT_NULL_PREDICATE)
+              .map(SudokuCell::getCellValue)
               .collect(Collectors.toSet()));
 
           // return true if there is no value that can be found
           return valueToCheck.stream()
-              .anyMatch(value -> Arrays.stream(cells)
-                  .filter(cell -> cell.getCellValue() == null)
-                  .map(SudokuCell::getSetOfPotentialValue)
-                  .anyMatch(setOfPotential -> setOfPotential.contains(value)));
+              .allMatch(value -> !Arrays.stream(cells)
+                  .anyMatch(cell ->
+                      cell.getCellValue() == null && !cell.getSetOfPotentialValue().contains(value))
+              );
         }).reduce((oldValue, newValue) -> oldValue && newValue).get();
   }
 }
