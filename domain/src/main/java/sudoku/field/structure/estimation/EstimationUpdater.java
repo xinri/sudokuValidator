@@ -22,11 +22,12 @@ public class EstimationUpdater {
     this.listOfCells = listOfCells;
   }
 
-  public void update() {
+  public boolean update() {
 
     final AtomicBoolean hasBeenModified = new AtomicBoolean(false);
 
     listOfCells.forEach(row -> {
+
       if (Arrays.stream(row).filter(CELL_NOT_NULL_PREDICATE).count() > 0) {
 
         Set<Integer> setToRemove = Arrays.stream(row).
@@ -34,24 +35,17 @@ public class EstimationUpdater {
             .map(SudokuCell::getCellValue)
             .collect(Collectors.toSet());
 
-        System.out.println("set to remove : " + setToRemove);
-
         Arrays.stream(row).filter(CELL_NULL_PREDICATE)
             .forEach(cell -> {
               setToRemove.forEach(toRemove -> cell.removePotentialValue(toRemove));
               if (cell.getSetOfPotentialValue().size() == 1) {
                 cell.setCellValue(cell.getSetOfPotentialValue().iterator().next());
-                cell.clearPotentialValue();
                 hasBeenModified.set(true);
               }
             });
       }
     });
 
-    if (hasBeenModified.get()) {
-      update();
-    }
-
-    System.out.println("count");
+    return hasBeenModified.get();
   }
 }

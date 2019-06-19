@@ -1,7 +1,5 @@
 package sudoku;
 
-import com.sun.rowset.internal.Row;
-import java.util.Arrays;
 import sudoku.field.SudokuCell;
 import sudoku.field.structure.Blocks;
 import sudoku.field.structure.Columns;
@@ -24,17 +22,16 @@ public class SudokuGrid {
     this.table = table.getCells();
 
     updateEmptyCell();
-//    if (Arrays.stream(table.getCells()).flatMap(Arrays::stream)
-//          .anyMatch(cell -> cell.getCellValue() == null))
-//    {
-//      updateEmptyCell();
-//    }
   }
 
   private void updateEmptyCell() {
-    new EstimationUpdater(new Rows(table).getListOfRow()).update();
-    new EstimationUpdater(new Columns(table).getListOfColumn()).update();
-    new EstimationUpdater(new Blocks(table).getBlocks()).update();
+    boolean update = true;
+
+    while (update) {
+      update = new EstimationUpdater(new Rows(table).getListOfRow()).update();
+      update |= new EstimationUpdater(new Columns(table).getListOfColumn()).update();
+      update |= new EstimationUpdater(new Blocks(table).getBlocks()).update();
+    }
   }
 
   public boolean validate() {

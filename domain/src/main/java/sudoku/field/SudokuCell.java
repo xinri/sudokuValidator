@@ -7,6 +7,9 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
+ * TODO : separate Cell with value with empty cell to have a single responsibility on how to handle
+ * TODO : when we have a empty cell or a not empty cell.
+ *
  * @author hlay
  * @version 1.0
  */
@@ -66,10 +69,6 @@ public class SudokuCell {
 
   public boolean removePotentialValue(int value) {
     return potentialValue.remove(value);
-  }
-
-  public void clearPotentialValue() {
-    potentialValue.clear();
   }
 
   @Override
